@@ -15,9 +15,7 @@ draggable.onmousedown = (e) => {
     startY = e.pageY - draggable.offsetTop;
     scrollLeft = draggable.scrollLeft;
     scrollTop = draggable.scrollTop;
-
     lastTime = Date.now();
-
     draggable.style.cursor = 'grabbing';
 
     // Останавливаем анимацию инерции, если она была запущена
@@ -27,7 +25,6 @@ draggable.onmousedown = (e) => {
 };
 
 draggable.onmousemove = (e) => { 
-    // console.log('onmousemove');
     if (!isDragging) return;
     e.preventDefault();
 
@@ -44,8 +41,8 @@ draggable.onmousemove = (e) => {
         velocityX = (walkX - (draggable.scrollLeft - scrollLeft)) / timeDiff;
         velocityY = (walkY - (draggable.scrollTop - scrollTop)) / timeDiff;
 
-        // Ограничиваем скорость:
-        const velosityLimit = 70;
+        // Ограничиваем максимальную скорость:
+        const velosityLimit = 100;
 
         if (velocityX > velosityLimit) { 
             velocityX = velosityLimit;
@@ -53,7 +50,7 @@ draggable.onmousemove = (e) => {
         if (velocityX < -velosityLimit) {
             velocityX = -velosityLimit;
         }  
-
+        
         if (velocityY > velosityLimit) {
             velocityY = velosityLimit;
         } 
@@ -71,8 +68,8 @@ draggable.onmousemove = (e) => {
 draggable.onmouseup = () => {
     isDragging = false;
     draggable.style.cursor = 'grab';
-    const currentTime = Date.now();
-  
+
+    const currentTime = Date.now();  
     const timeDiff = currentTime - lastTime;
 
     // Запускаем анимацию инерции
@@ -93,8 +90,8 @@ function inertia() {
 
     // Если скорость достаточно большая, продолжаем анимацию
     if (Math.abs(velocityX) > minVelocity || Math.abs(velocityY) > minVelocity) {
-        draggable.scrollLeft -= velocityX * 0.5;
-        draggable.scrollTop -= velocityY * 0.5;
+        draggable.scrollLeft -= velocityX * 0.3;
+        draggable.scrollTop -= velocityY * 0.3;
 
         // Замедляем скорость
         velocityX *= friction;
