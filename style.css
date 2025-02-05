@@ -1,0 +1,25 @@
+.draggable {
+  width: 100%; /* Ширина контейнера */
+  height: max-content; /* Высота контейнера */
+  overflow: hidden; /* Скрываем всё, что выходит за пределы контейнера */
+  position: relative;
+  border: 1px solid #ccc;
+}
+
+.table ul {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+}
+
+.table ul li {
+  border: 1px solid #ccc;
+  width: 400px;
+  height: 200px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: none;
+  font-size: 36px;
+}
